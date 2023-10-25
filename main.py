@@ -566,8 +566,25 @@ def admin_panel():
     Login.place(x=290, y=250)
     win.mainloop()
 
+def getImagesAndLabels(path):
+    imagePaths = [os.path.join(path, f) for f in os.listdir(path)]
+    # create empth face list
+    faceSamples = []
+    Ids = []
+    for imagePath in imagePaths:
+        pilImage = Image.open(imagePath).convert('L')
+        imageNp = np.array(pilImage, 'uint8')
 
-###For train the model
+        Id = int(os.path.split(imagePath)[-1].split(".")[1])
+        # extract the face from the training image sample
+        faces = detector.detectMultiScale(imageNp)
+        # If a face is there then append that in the list as well as Id of it
+        for (x, y, w, h) in faces:
+            faceSamples.append(imageNp[y:y + h, x:x + w])
+            Ids.append(Id)
+    return faceSamples, Ids
+
+##For train the model
 def trainimg():
     recognizer = cv2.face.LBPHFaceRecognizer_create()
     global detector
