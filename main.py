@@ -17,6 +17,21 @@ import time
          window.destroy()
 window.protocol("WM_DELETE_WINDOW", on_closing)
 
+####
+def del_sc2():
+    sc2.destroy()
+def err_screen1():
+    global sc2
+    sc2 = tk.Tk()
+    sc2.geometry('300x100')
+    sc2.iconbitmap('AMS.ico')
+    sc2.title('Warning!!')
+    sc2.configure(background='snow')
+    Label(sc2,text='Please enter your subject name!!!',fg='red',bg='white',font=('times', 16, ' bold ')).pack()
+    Button(sc2,text='OK',command=del_sc2,fg="black"  ,bg="lawn green"  ,width=9  ,height=1, activebackground = "Red" ,font=('times', 15, ' bold ')).place(x=90,y= 50)
+
+
+
 #####Window is our Main frame of system
 window = tk.Tk()
 window.title("Face Recognition Based Attendance Management System")##destroy 
