@@ -9,9 +9,17 @@ import pandas as pd
 import datetime
 import time
 
+
+####add window quit button
+ def on_closing():
+     from tkinter import messagebox
+     if messagebox.askokcancel("Quit", "Do you want to quit?"):
+         window.destroy()
+window.protocol("WM_DELETE_WINDOW", on_closing)
+
 #####Window is our Main frame of system
 window = tk.Tk()
-window.title("Face Recognition Based Attendance Management System")
+window.title("Face Recognition Based Attendance Management System")##destroy 
 
 window.geometry('1280x720')
 window.configure(background='snow')
